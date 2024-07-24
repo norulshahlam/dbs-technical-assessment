@@ -7,6 +7,7 @@ import com.dbs.dbs_technical_assessment.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,9 +26,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public MyResponse<Page<Customer>> getAllCustomersByFirstName(String firstName, int page, int size, String sortBy) {
+    public MyResponse<Page<Customer>> getAllCustomersByFirstName(String firstName, int page, int size, String sortBy, String ascDesc) {
 
-        Pageable pageRequest = of(page, size).withSort(by(sortBy));
+        Pageable pageRequest = of(page, size).withSort(by(Sort.Direction.valueOf(ascDesc),sortBy));
         Page<Customer> all = repository.findByFirstName(firstName, pageRequest);
         return MyResponse.successResponse(all);
     }
