@@ -31,8 +31,9 @@ public class CustomerController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "age") String sortBy,
-            @RequestParam(defaultValue = "adam") String firstName) {
-        return ResponseEntity.ok(customerService.getAllCustomersByFirstName(firstName, page, size, sortBy));
+            @RequestParam(defaultValue = "adam") String firstName,
+            @RequestParam(defaultValue = "ASC") String ascDesc) {
+        return ResponseEntity.ok(customerService.getAllCustomersByFirstName(firstName, page, size, sortBy,ascDesc));
     }
     @GetMapping("getAllCustomers")
     public ResponseEntity<MyResponse<Page<Customer>>> getAllustomers(
